@@ -1,0 +1,46 @@
+<div class="border-4 border-red-500 bg-[#7f9db9] p-4 flex flex-col gap-4">
+  <!-- Información del Cliente -->
+  <div class="flex gap-4">
+    <div class="flex flex-col">
+      <label>Nombre:</label>
+      <input type="text" class="border border-gray-300 rounded p-1" [(ngModel)]="customerName" />
+    </div>
+    <div class="flex flex-col">
+      <label>Dirección:</label>
+      <input type="text" class="border border-gray-300 rounded p-1" [(ngModel)]="customerAddress" />
+    </div>
+    <div class="flex flex-col">
+      <label>Teléfono:</label>
+      <input type="text" class="border border-gray-300 rounded p-1" [(ngModel)]="customerPhone" />
+    </div>
+  </div>
+
+  <!-- Detalles de la Pizza -->
+  <div class="flex gap-8">
+    <div class="flex flex-col">
+      <label>Tamaño Pizza</label>
+      <div class="flex gap-2">
+        <label><input type="radio" [(ngModel)]="selectedSize" value="Chica" /> Chica $40</label>
+        <label><input type="radio" [(ngModel)]="selectedSize" value="Mediana" /> Mediana $80</label>
+        <label><input type="radio" [(ngModel)]="selectedSize" value="Grande" /> Grande $120</label>
+      </div>
+    </div>
+
+    <div class="flex flex-col">
+      <label>Ingredientes</label>
+      <div class="flex gap-2">
+        <label><input type="checkbox" (change)="toggleIngredient('Jamón')" /> Jamón $10</label>
+        <label><input type="checkbox" (change)="toggleIngredient('Piña')" /> Piña $10</label>
+        <label><input type="checkbox" (change)="toggleIngredient('Champiñones')" /> Champiñones $10</label>
+      </div>
+    </div>
+
+    <div class="flex flex-col">
+      <label>Núm. de Pizzas:</label>
+      <input type="number" class="border border-gray-300 rounded p-1" [(ngModel)]="quantity" min="1" />
+    </div>
+  </div>
+
+  <!-- Botón para agregar al pedido -->
+  <button class="bg-gray-300 px-4 py-2 rounded mt-4" (click)="addOrder()">Agregar</button>
+</div>

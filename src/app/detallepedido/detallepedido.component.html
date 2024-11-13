@@ -1,0 +1,30 @@
+<div class="border-4 border-black bg-[#7f9db9] p-4 w-full md:w-1/2">
+   <table class="min-w-full border-collapse border border-gray-400">
+     <thead>
+       <tr>
+         <th class="border border-gray-300 px-4 py-2">Nombre</th>
+         <th class="border border-gray-300 px-4 py-2">Tamaño</th>
+         <th class="border border-gray-300 px-4 py-2">Ingredientes</th>
+         <th class="border border-gray-300 px-4 py-2">Cantidad</th>
+         <th class="border border-gray-300 px-4 py-2">Subtotal</th>
+         <th class="border border-gray-300 px-4 py-2">Acciones</th>
+       </tr>
+     </thead>
+     <tbody>
+       <tr *ngFor="let pizza of pizzas; let i = index">
+         <td class="border border-gray-300 px-4 py-2">{{ pizza.customerName }}</td>
+         <td class="border border-gray-300 px-4 py-2">{{ pizza.size }}</td>
+         <td class="border border-gray-300 px-4 py-2">{{ pizza.ingredients.join(', ') }}</td>
+         <td class="border border-gray-300 px-4 py-2">{{ pizza.quantity }}</td>
+         <td class="border border-gray-300 px-4 py-2">{{ pizza.subtotal | currency }}</td>
+         <td class="border border-gray-300 px-4 py-2">
+           <button class="bg-red-500 text-white px-4 py-2 rounded" (click)="removePizza(i)">Quitar</button>
+         </td>
+       </tr>
+     </tbody>
+   </table>
+ 
+   <!-- Botón Terminar -->
+   <button class="mt-4 bg-gray-300 px-4 py-2 rounded" (click)="finishOrder()">Terminar</button>
+ </div>
+ 
