@@ -1,4 +1,23 @@
-<div class="text-right p-4">
-    <p>Total de Ventas: <span class="font-bold">${{ totalSales }}</span></p>
+<div class="w-full sm:w-[500px] h-auto sm:h-[200px] bg-blue-700 p-4 rounded-lg shadow-lg">
+  <div class="ventas-del-dia p-4 bg-blue-500 text-black rounded-lg shadow-md">
+    <h3 class="text-xl font-semibold text-center mb-4">Ventas del Día</h3>
+
+    <div id="lista-ventas" class="mb-4">
+      <div *ngFor="let venta of ventas" class="flex justify-between py-1 border-b border-gray-300">
+        <p class="text-sm font-medium">{{ venta.nombre }}</p>
+        <p class="text-sm font-semibold">Total: ${{ venta.subtotal | currency }}</p>
+      </div>
+    </div>
+
+    <div class="mb-4 text-right">
+      <p class="text-sm font-semibold">Ventas del día: <span class="font-bold">${{ ventasTotales | currency }}</span></p>
+    </div>
+
+    <div class="flex justify-between">
+      <button (click)="filtrarVentasPorFecha('día')" 
+              class="w-full sm:w-auto bg-blue-600 text-black p-2 rounded-lg shadow-md hover:bg-blue-700 transition duration-300 text-sm">
+        Ventas Totales
+      </button>
+    </div>
   </div>
-  
+</div>

@@ -1,24 +1,58 @@
-import { Component, OnInit } from '@angular/core';
-import { OrdenService } from '../orden.service';
 import { CommonModule } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { PedidoService } from '../services/orden.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-detallepedido',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './detallepedido.component.html',
-  styleUrls: ['./detallepedido.component.css']
+  styleUrls: [] 
 })
-export class DetallePedidoComponent implements OnInit {
-  pizzas: any[] = [];  
+export class DetallepedidoComponent implements OnInit {
+  pedidos: any[] = [];
+  pedidoEnEdicion: number | null = null;
 
-  constructor(private ordenService: OrdenService) {}
+  constructor(private pedidoService: PedidoService) {}
 
-  ngOnInit() {
-    this.pizzas = this.ordenService.getOrders();  
+  ngOnInit(): void {
+    this.cargarPedidos();
   }
 
-  removePizza(index: number) {
-    this.ordenService.removePizzaFromOrder(index);
+  editarPedido(index: number) {
+    this.pedidoEnEdicion = index;  
+  }
+
+  cargarPedidos() {
+    this.pedidos = this.pedidoService.obtenerPedidos();
+  }
+  
+  quitarPedido(index: number) {
+    this.pedidoService.eliminarPedido(index);
+    this.cargarPedidos();
+  }
+
+  terminarPedido(index: number) {
+    const pedido = this.pedidos[index];
+    const costoTotal = pedido.subtotal;
+    const confirmacion = confirm(`El costo total de su pedido es ${costoTotal}. ¿Está de acuerdo con el total?`);
+
+    if (confirmacion) {
+      this.pedidoService.terminarPedido(index);
+      this.pedidos[index].terminado = true;
+      this.pedidos[index].fechaTerminado = new Date().toISOString();
+    } else {
+      this.pedidoEnEdicion = index;
+    }
+  }
+
+  guardarEdicion(index: number) {
+    this.pedidoEnEdicion = null;
+    alert('Pedido editado con éxito.');
+  }
+
+  cancelarEdicion() {
+    this.pedidoEnEdicion = null;
   }
 }

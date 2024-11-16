@@ -1,46 +1,46 @@
-<div class="border-4 border-red-500 bg-[#7f9db9] p-4 flex flex-col gap-4">
-  <!-- Información del Cliente -->
-  <div class="flex gap-4">
-    <div class="flex flex-col">
-      <label>Nombre:</label>
-      <input type="text" class="border border-gray-300 rounded p-1" [(ngModel)]="customerName" />
-    </div>
-    <div class="flex flex-col">
-      <label>Dirección:</label>
-      <input type="text" class="border border-gray-300 rounded p-1" [(ngModel)]="customerAddress" />
-    </div>
-    <div class="flex flex-col">
-      <label>Teléfono:</label>
-      <input type="text" class="border border-gray-300 rounded p-1" [(ngModel)]="customerPhone" />
-    </div>
-  </div>
+<div style="background-color: rgba(128, 128, 128, 0.1); padding: 0.5rem; border-radius: 0.25rem; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
+  <h2 style="font-size: 1rem; font-weight: 600; text-align: center; color: black; margin-bottom: 1rem;">Información del Cliente</h2>
 
-  <!-- Detalles de la Pizza -->
-  <div class="flex gap-8">
-    <div class="flex flex-col">
-      <label>Tamaño Pizza</label>
-      <div class="flex gap-2">
-        <label><input type="radio" [(ngModel)]="selectedSize" value="Chica" /> Chica $40</label>
-        <label><input type="radio" [(ngModel)]="selectedSize" value="Mediana" /> Mediana $80</label>
-        <label><input type="radio" [(ngModel)]="selectedSize" value="Grande" /> Grande $120</label>
+  <div style="display: flex; justify-content: space-between; gap: 0.5rem; margin-bottom: 1rem;">
+    <!-- Información del Cliente -->
+    <div style="flex: 1; display: flex; flex-direction: column; gap: 0.25rem;">
+      <label for="nombre" style="font-weight: 600; color: #2d3748; font-size: 0.75rem;">Nombre:</label>
+      <input type="text" [(ngModel)]="nombre" id="nombre" style="border: 1px solid #e2e8f0; border-radius: 0.25rem; padding: 0.25rem; font-size: 0.75rem;" required />
+
+      <label for="direccion" style="font-weight: 600; color: #2d3748; font-size: 0.75rem;">Dirección:</label>
+      <input type="text" [(ngModel)]="direccion" id="direccion" style="border: 1px solid #e2e8f0; border-radius: 0.25rem; padding: 0.25rem; font-size: 0.75rem;" required />
+
+      <label for="telefono" style="font-weight: 600; color: #2d3748; font-size: 0.75rem;">Teléfono:</label>
+      <input type="text" [(ngModel)]="telefono" id="telefono" style="border: 1px solid #e2e8f0; border-radius: 0.25rem; padding: 0.25rem; font-size: 0.75rem;" required />
+    </div>
+
+    <!-- Tamaño de la Pizza -->
+    <div style="flex: 1; padding: 0.5rem; border: 1px solid #e2e8f0; border-radius: 0.25rem; background-color: white; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);">
+      <label style="font-weight: 600; color: #2d3748; font-size: 0.75rem; margin-bottom: 0.25rem; display: block;">Tamaño de la Pizza:</label>
+      <div style="display: flex; flex-direction: column; gap: 0.25rem; font-size: 0.75rem;">
+        <label><input type="radio" name="tamaño" (change)="tamano = 'Chica'" /> Chica $40</label>
+        <label><input type="radio" name="tamaño" (change)="tamano = 'Mediana'" /> Mediana $80</label>
+        <label><input type="radio" name="tamaño" (change)="tamano = 'Grande'" /> Grande $120</label>
       </div>
     </div>
 
-    <div class="flex flex-col">
-      <label>Ingredientes</label>
-      <div class="flex gap-2">
-        <label><input type="checkbox" (change)="toggleIngredient('Jamón')" /> Jamón $10</label>
-        <label><input type="checkbox" (change)="toggleIngredient('Piña')" /> Piña $10</label>
-        <label><input type="checkbox" (change)="toggleIngredient('Champiñones')" /> Champiñones $10</label>
+    <!-- Ingredientes -->
+    <div style="flex: 1; padding: 0.5rem; border: 1px solid #e2e8f0; border-radius: 0.25rem; background-color: white; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);">
+      <label style="font-weight: 600; color: #2d3748; font-size: 0.75rem; margin-bottom: 0.25rem; display: block;">Ingredientes:</label>
+      <div style="display: flex; flex-direction: column; gap: 0.25rem; font-size: 0.75rem;">
+        <label><input type="checkbox" (change)="toggleIngrediente('Jamón', $event)" /> Jamón $10</label>
+        <label><input type="checkbox" (change)="toggleIngrediente('Piña', $event)" /> Piña $10</label>
+        <label><input type="checkbox" (change)="toggleIngrediente('Champiñones', $event)" /> Champiñones $10</label>
       </div>
-    </div>
-
-    <div class="flex flex-col">
-      <label>Núm. de Pizzas:</label>
-      <input type="number" class="border border-gray-300 rounded p-1" [(ngModel)]="quantity" min="1" />
     </div>
   </div>
 
-  <!-- Botón para agregar al pedido -->
-  <button class="bg-gray-300 px-4 py-2 rounded mt-4" (click)="addOrder()">Agregar</button>
+  <!-- Cantidad y botón -->
+  <div style="display: flex; justify-content: center; gap: 0.5rem; margin-top: 1rem;">
+    <div style="flex: 1; max-width: 200px;">
+      <label style="font-weight: 600; color: #2d3748; font-size: 0.75rem; display: block; margin-bottom: 0.25rem;">Cantidad de Pizzas:</label>
+      <input type="number" [(ngModel)]="numPizzas" min="1" style="width: 100%; padding: 0.25rem; border: 1px solid #e2e8f0; border-radius: 0.25rem; font-size: 0.75rem;" />
+    </div>
+    <button (click)="guardarPedido()" style="flex: 1; max-width: 200px; background-color: #3b82f6; color: white; padding: 0.25rem; border-radius: 0.25rem; font-size: 0.75rem; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); cursor: pointer;">Agregar Pizza</button>
+  </div>
 </div>
